@@ -6,11 +6,10 @@ namespace App\Controller;
 
 use App\Entity\Agent;
 use App\Form\AgentType;
-use App\Repository\AgentRepository;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HomePageController extends Controller
 {
@@ -68,6 +67,29 @@ class HomePageController extends Controller
         return $this->render('HomePages/listerAgents.html.twig'
             ,[
                 'listeagents' => $listeAgents,
+            ]);
+
+
+
+    }
+
+    /**
+     * @Route("/voir-agent/{id}", name="voirAgent")
+     *
+     */
+    public function viewAgentsAction($id)
+    {
+        $em = $this->getDoctrine()->getRepository(Agent::class);
+
+        $agent = $em->find($id);
+
+        if (null === $agent) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('HomePages/voirAgent.html.twig'
+            ,[
+                'agent' => $agent,
             ]);
 
 

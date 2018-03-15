@@ -1,0 +1,16 @@
+{% extends "./layout.html.twig" %}
+{% block body %}
+
+    <div>
+
+        <h1 id="lastTitle">Fiche de l'agent</h1>
+
+            <div>
+                        {{ agent.nom }} {{ agent.prenom }} {{ agent.sexe }} {{ agent.fonction }}
+            </div>
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
