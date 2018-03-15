@@ -6,6 +6,10 @@ namespace App\Controller;
 
 use App\Entity\Agent;
 use App\Form\AgentType;
+use Exporter\Handler;
+use Exporter\Writer\CsvWriter;
+use Exporter\Source\PDOStatementSourceIterator;
+use PDO;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -63,6 +67,24 @@ class HomePageController extends Controller
         $em = $this->getDoctrine()->getRepository(Agent::class);
 
         $listeAgents = $em->findAll();
+
+
+        // Prepare the data source
+
+
+
+        //$dbh = new PDO('mysql:rh_greta', 'root');
+
+        $bdd = new PDO('mysql:host=localhost;dbname=rh_greta', 'root','');
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $reponse = $bdd->query('SELECT nom, prenom, sexe, fonction FROM agent');
+
+        $source = new PDOStatementSourceIterator($reponse);
+
+        $writer = new CsvWriter('data.csv');
+
+        Handler::create($source, $writer)->export();
+
 
         return $this->render('HomePages/listerAgents.html.twig'
             ,[
