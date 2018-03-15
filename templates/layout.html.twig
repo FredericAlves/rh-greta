@@ -19,10 +19,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a style="color: #fff;" class="nav-link" href="/admin">Les agents</a>
+                <a style="color: #fff;" class="nav-link" href="{{ path('listerAgents') }}">Les agents</a>
             </li>
             <li class="nav-item">
-                <a style="color: #fff;" class="nav-link" href="/">Les contrats</a>
+                <a style="color: #fff;" class="nav-link" href="{{ path('ajouterAgent') }}">Ajouter un agent</a>
+            </li>
+            <li class="nav-item">
+                <a style="color: #fff;" class="nav-link" href="{{ path('admin') }}">Les contrats</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -43,7 +46,22 @@
         </ul>
     </div>
 </nav>
-{% block body %}{% endblock %}
+{% for msg in app.session.flashBag.get('success') %}
+    <div class="alert alert-success">
+        {{ msg|trans }}
+    </div>
+{% endfor %}
+{% for msg in app.session.flashBag.get('error') %}
+    <div class="alert alert-danger">
+        {{ msg|trans }}
+    </div>
+{% endfor %}
+
+{% block body %}
+
+{% endblock %}
+
+
 <footer class="footer">
     <div class="container text-center">
         <span class="text-muted">Mentions légales<i class="fa fa-heart" style="color: red;"></i></span>

@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class AdminPageController extends AbstractController
 {
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="admin")
      *
      *
      */

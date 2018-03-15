@@ -1,0 +1,24 @@
+{% extends "./layout.html.twig" %}
+{% block body %}
+
+    <div>
+
+        <h1 id="lastTitle">Les agents</h1>
+        {% if listeagents == null %}
+            <p>Aucun agent rentré dans la base </p>
+        {% else %}
+            <div>
+                {% for agent in listeagents %}
+                    <div class="col-md-4">
+                        {{ agent.nom }} {{ agent.prenom }}
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

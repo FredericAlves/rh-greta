@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,7 +31,7 @@ class Agent
     /**
      * @var String
      *
-     * @ORM\Column(name="utilisateurCreateur", type="string", length=255, nullable=false)
+     * @ORM\Column(name="utilisateurCreateur", type="string", length=255, nullable=true)
      *
      */
     private $utilisateurCreateur;
@@ -37,7 +39,7 @@ class Agent
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDeModification", type="datetime")
+     * @ORM\Column(name="dateDeModification", type="datetime", nullable=true)
      *
      * @Assert\Date()
      */
@@ -46,7 +48,7 @@ class Agent
     /**
      * @var String
      *
-     * @ORM\Column(name="utilisateurModificateur", type="string", length=255)
+     * @ORM\Column(name="utilisateurModificateur", type="string", length=255, nullable=true)
      *
      */
     private $utilisateurModificateur;
@@ -90,7 +92,7 @@ class Agent
     /**
      * @var string
      *
-     * @ORM\Column(name="sexe", type="string", length=1, nullable=false)
+     * @ORM\Column(name="sexe", type="string", length=5, nullable=false)
      * @Assert\NotNull(message="Veuillez indiquer le sexe de l'agent.")
      * @Assert\Choice(choices={"Homme", "Femme"}, message="Vous devez choisir une entrée valide.", strict=true)
      */
@@ -137,11 +139,16 @@ class Agent
     /**
      * @var string
      *
-     * @ORM\Column(name="specialite", type="string", nullable=false)
+     * @ORM\Column(name="specialite", type="string", nullable=true)
      *
      *
      */
     private $specialite;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contrat", mappedBy="agent", cascade={"persist"})
+     */
+    private $contrats;
 
 
 

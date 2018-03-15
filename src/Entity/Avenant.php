@@ -5,15 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContratRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AvenantRepository")
  */
-class Contrat
+class Avenant
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -53,21 +52,16 @@ class Contrat
     private $utilisateurModificateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Agent", inversedBy="contrats"))
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contrat", inversedBy="avenants"))
      * @ORM\JoinColumn(nullable=false)
      */
-    private $agent;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Avenant", mappedBy="contrat", cascade={"persist"})
-     */
-    private $avenants;
+    private $contrat;
 
 
 
     public function __construct()
     {
-        $this->avenants = new ArrayCollection();
+
         $this->dateDeCreation = new \DateTime();
     }
 
@@ -128,4 +122,5 @@ class Contrat
     {
         $this->utilisateurModificateur = $utilisateurModificateur;
     }
+
 }
