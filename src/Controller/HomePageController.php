@@ -45,7 +45,7 @@ class HomePageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($agent);
             $em->flush();
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('listerAgents');
         }
 
         return $this->render('HomePages/ajouterAgent.html.twig'
@@ -71,19 +71,15 @@ class HomePageController extends Controller
 
         // Prepare the data source
 
-
-
-        //$dbh = new PDO('mysql:rh_greta', 'root');
-
-        $bdd = new PDO('mysql:host=localhost;dbname=rh_greta', 'root','');
-        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $reponse = $bdd->query('SELECT nom, prenom, sexe, fonction FROM agent');
-
-        $source = new PDOStatementSourceIterator($reponse);
-
-        $writer = new CsvWriter('data.csv');
-
-        Handler::create($source, $writer)->export();
+//        $bdd = new PDO('mysql:host=localhost;dbname=rh_greta', 'root','');
+//        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//        $reponse = $bdd->query('SELECT nom, prenom, sexe, fonction FROM agent');
+//
+//        $source = new PDOStatementSourceIterator($reponse);
+//
+//        $writer = new CsvWriter('data.csv');
+//
+//        Handler::create($source, $writer)->export();
 
 
         return $this->render('HomePages/listerAgents.html.twig'

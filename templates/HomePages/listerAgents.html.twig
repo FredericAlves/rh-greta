@@ -7,13 +7,21 @@
         {% if listeagents == null %}
             <p>Aucun agent rentré dans la base </p>
         {% else %}
-            <div>
-                {% for agent in listeagents %}
-                    <div class="col-md-4">
-                        {{ agent.nom }} {{ agent.prenom }}
+            <div class="tableListeAgents">
+                <table>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
 
-                    </div>
+                {% for agent in listeagents %}
+                    <tr>
+                    <td> <a style="color: #000;" class="nav-link" href="{{ path('voirAgent', {'id': agent.id } ) }}">{{ agent.nom }}</a> </td>
+                        <td>   {{ agent.prenom }}</td>
+                    </tr>
                 {% endfor %}
+
+                </table>
             </div>
         {% endif %}
 

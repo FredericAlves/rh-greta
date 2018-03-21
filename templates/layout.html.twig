@@ -32,18 +32,18 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Rechercher">
             <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
         </form>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown" style="margin-right: 75px;">
-                <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="nav-profile-img rounded-circle" src="images/profil.png">
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Create Post</a>
-                    <a class="dropdown-item" href="#">Logout</a>
-                </div>
-            </li>
-        </ul>
+        {#<ul class="navbar-nav ml-auto">#}
+            {#<li class="nav-item dropdown" style="margin-right: 75px;">#}
+                {#<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+                    {#<img class="nav-profile-img rounded-circle" src="images/profil.png">#}
+                {#</a>#}
+                {#<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">#}
+                    {#<a class="dropdown-item" href="#">Profile</a>#}
+                    {#<a class="dropdown-item" href="#">Create Post</a>#}
+                    {#<a class="dropdown-item" href="#">Logout</a>#}
+                {#</div>#}
+            {#</li>#}
+        {#</ul>#}
     </div>
 </nav>
 {% for msg in app.session.flashBag.get('success') %}
@@ -63,9 +63,9 @@
 
 
 <footer class="footer">
-    <div class="container text-center">
-        <span class="text-muted">Mentions légales<i class="fa fa-heart" style="color: red;"></i></span>
-    </div>
+    {#<div class="container text-center">#}
+        {#<span class="text-muted">Mentions légales<i class="fa fa-heart" style="color: red;"></i></span>#}
+    {#</div>#}
 </footer>
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

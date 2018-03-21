@@ -7,10 +7,34 @@ body {
 
 html {height:100%}
 
+.tableListeAgents {
+    padding-left: 80px;
+}
+
+#lastTitle{
+    padding-left: 80px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th {
+    background-color: #7c8ea3;
+}
+
+td {
+    background-color: #D3D3D3;
+}
+
+td:hover {
+    background-color: #5eb5e0;
+}
+
 /* NAVIGATION */
 
 .navbar-bg {
-    background: url('../images/bandeau.png');
+    /*background: url('../images/bandeau.png');*/
     background-color: black;
     background-size: 80%;
 }
