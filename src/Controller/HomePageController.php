@@ -5,7 +5,9 @@ namespace App\Controller;
 
 
 use App\Entity\Agent;
+use App\Entity\Contrat;
 use App\Form\AgentType;
+use App\Form\ContratType;
 use Exporter\Handler;
 use Exporter\Writer\CsvWriter;
 use Exporter\Source\PDOStatementSourceIterator;
@@ -101,6 +103,10 @@ class HomePageController extends Controller
 
         $agent = $em->find($id);
 
+        $em = $this->getDoctrine()->getRepository(Contrat::class);
+
+        $contrats = $em->findBy(array('agent' => $id));
+
         if (null === $agent) {
             throw new NotFoundHttpException();
         }
@@ -108,6 +114,45 @@ class HomePageController extends Controller
         return $this->render('HomePages/voirAgent.html.twig'
             ,[
                 'agent' => $agent,
+                'contrats' => $contrats
+            ]);
+
+
+
+    }
+
+    /**
+     * @Route("/ajouter-contrat/{id}", name="ajouterContrat")
+     *
+     */
+    public function addContratAction(Request $request, $id)
+    {
+        $contrat = new Contrat();
+
+        $em = $this->getDoctrine()->getRepository(Agent::class);
+
+        $agent = $em->find($id);
+
+        $contrat->setAgent($agent);
+
+        $form = $this->createForm(ContratType::class, $contrat);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $agent->addContrat($contrat);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contrat);
+            $em->persist($agent);
+            $em->flush();
+            return $this->redirectToRoute('voirAgent', array('id' => $id));
+        }
+
+        return $this->render('HomePages/ajouterContrat.html.twig'
+            ,[
+                'contrat' => $contrat,
+                'form' => $form->createView()
             ]);
 
 

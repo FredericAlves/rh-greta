@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -30,7 +31,7 @@ class Contrat
     /**
      * @var String
      *
-     * @ORM\Column(name="utilisateurCreateur", type="string", length=255, nullable=false)
+     * @ORM\Column(name="utilisateurCreateur", type="string", length=255, nullable=true)
      *
      */
     private $utilisateurCreateur;
@@ -38,7 +39,7 @@ class Contrat
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDeModification", type="datetime")
+     * @ORM\Column(name="dateDeModification", type="datetime", nullable=true)
      *
      * @Assert\Date()
      */
@@ -47,10 +48,27 @@ class Contrat
     /**
      * @var String
      *
-     * @ORM\Column(name="utilisateurModificateur", type="string", length=255)
+     * @ORM\Column(name="utilisateurModificateur", type="string", length=255, nullable=true)
      *
      */
     private $utilisateurModificateur;
+
+    /**
+     * @var String
+     *
+     * @ORM\Column(name="greta", type="string", length=128)
+     *
+     */
+    private $greta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="typeDuree", type="string", length=5, nullable=false)
+     * @Assert\NotNull(message="Veuillez indiquer le type de contrat.")
+     * @Assert\Choice(choices={"CDI", "CDD"}, message="Vous devez choisir une entrée valide.", strict=true)
+     */
+    private $typeDuree;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Agent", inversedBy="contrats"))
@@ -127,5 +145,61 @@ class Contrat
     public function setUtilisateurModificateur($utilisateurModificateur)
     {
         $this->utilisateurModificateur = $utilisateurModificateur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeDuree()
+    {
+        return $this->typeDuree;
+    }
+
+    /**
+     * @param mixed $typeDuree
+     */
+    public function setTypeDuree($typeDuree)
+    {
+        $this->typeDuree = $typeDuree;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAgent()
+    {
+        return $this->agent;
+    }
+
+    /**
+     * Set agent
+     *
+     * @param Agent $agent
+     *
+     * @return Contrat
+     */
+
+    public function setAgent(Agent $agent)
+    {
+        $this->agent = $agent;
+        return $this;
+    }
+
+
+
+    /**
+     * @return String
+     */
+    public function getGreta()
+    {
+        return $this->greta;
+    }
+
+    /**
+     * @param String $greta
+     */
+    public function setGreta($greta)
+    {
+        $this->greta = $greta;
     }
 }

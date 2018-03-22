@@ -1,7 +1,5 @@
 {% extends "./layout.html.twig" %}
-    {% block stylesheets %}
 
-    {% endblock %}
 {% block body %}
 
     <div>
@@ -9,8 +7,21 @@
         <h1 id="lastTitle">Fiche de l'agent</h1>
 
             <div>
-                        {{ agent.nom }} {{ agent.prenom }} {{ agent.sexe }} {{ agent.fonction }}
+                <p> {{ agent.nom }} </p>
+                <p>{{ agent.prenom }} </p>
+                <p>{{ agent.sexe }}</p>
+                <p>{{ agent.fonction }}</p>
+                <p><a style="color: #000;" class="nav-link" href="{{ path('ajouterContrat', {'id': agent.id } ) }}">Ajouter un contrat</a> </p>
             </div>
+
+        {% for contrat in contrats %}
+
+            <div>
+                <p>{{ contrat.greta }} - {{ contrat.typeDuree }}</p>
+
+            </div>
+
+        {% endfor %}
 
     </div>
 

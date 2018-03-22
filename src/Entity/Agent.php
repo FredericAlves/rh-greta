@@ -376,7 +376,20 @@ class Agent
         $this->specialite = $specialite;
     }
 
+    /**
+     * Add contrat
+     *
+     * @param Contrat $contrat
+     *
+     * @return Contrat
+     */
 
+    public function addContrat(Contrat $contrat)
+    {
+        $this->contrats[] = $contrat;
+        $contrat->setAgent($this);
+        return $this;
+    }
 
 
 
